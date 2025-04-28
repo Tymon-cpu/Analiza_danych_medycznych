@@ -30,3 +30,13 @@ care_state <- care_state %>%
 
 cor(care_state$waiting_time, care_state$population)
 #korelacja równa zero co oznacza brak powiazania czasu oczekiwania a populacji.
+
+care_state_by_condition <- care_state %>% 
+  group_by(condition) %>% 
+  summarise(mean_time = mean(waiting_time))
+
+care_state_by_condition$condition[care_state_by_condition$mean_time == min(care_state_by_condition$mean_time)]
+# najkrotszy czas oczekiwania dla "Healthcare Personnel Vaccination"
+
+care_state_by_condition$condition[care_state_by_condition$mean_time == max(care_state_by_condition$mean_time)]
+# najdluzszy czas oczekiwania dla "Sepsis Care"
