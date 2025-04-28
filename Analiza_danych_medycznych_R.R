@@ -22,3 +22,11 @@ population_state <- data.frame(
                 4272371, 13078751, 3153000, 1112308, 5478831, 924669, 7227750, 31290831,
                 3503613, 8811195, 87146, 648493, 7958180, 5960975, 1769979, 587618)
 )
+
+care_state <- left_join(care_state, population_state, by = c("state" = "state_name"))
+
+care_state <- care_state %>% 
+  mutate(waiting_time = as.numeric(waiting_time))
+
+cor(care_state$waiting_time, care_state$population)
+#korelacja równa zero co oznacza brak powiazania czasu oczekiwania a populacji.
